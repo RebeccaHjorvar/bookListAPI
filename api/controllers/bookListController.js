@@ -14,11 +14,12 @@ exports.listAllBooks = (req, res) => {
 };
 
 exports.createABook = (req, res) => {
-    Book.findById(req.params.bookId, (err, book) => {
+    let newBook = new Book(req.body);
+    newBook.save((err, book) => {
         try {
-            res.json(book)
+            res.json(book);
         } catch {
-            res.send('error: ' + err)
+            res.send('error: ' + err);
         }
     });
 };
@@ -26,7 +27,7 @@ exports.createABook = (req, res) => {
 exports.readABook = (req, res) => {
     Book.findById(req.params.bookId, (err, book) => {
         try {
-            res.json(book)
+            book.save();
         } catch {
             res.send('error: ' + err)
         }
